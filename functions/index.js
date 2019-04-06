@@ -9,6 +9,9 @@ admin.initializeApp(functions.config().firebase)
 const app = express()
 const main = express()
 
+const pixelsRoute = require('./api/pixels')
+const snapshotsRoute = require('./api/snapshots')
+
 main.use('/api/v1', app)
 main.use(bodyParser.json())
 main.use(bodyParser.urlencoded({ extended: false }))
@@ -18,5 +21,8 @@ app.get('/', (req, res) => {
     message: 'API with firebase functions'
   })
 })
+
+app.use('/pixels', pixelsRoute)
+app.use('/snapshots', snapshotsRoute)
 
 exports.webApi = functions.https.onRequest(main)
