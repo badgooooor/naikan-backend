@@ -12,6 +12,16 @@ router.get('/', (req, res) => {
   })
 })
 
+router.get('/getAll', (req, res) => {
+  firebaseHelper.firestore
+    .backup(db, pixelsCollections)
+    .then(data => res.status(200).send(data))
+    .catch((err) => {
+      console.log(err)
+      res.error(404)
+    })
+})
+
 router.post('/newTodayPixel', (req, res) => {
   let today = admin.firestore.Timestamp.now()
   let todayPixel = {
