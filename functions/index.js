@@ -3,8 +3,14 @@ const admin = require('firebase-admin')
 const firebaseHelper = require('firebase-functions-helper')
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
-admin.initializeApp(functions.config().firebase)
+var serviceAccount = require('./config/serviceAccount.json')
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://naikan-87838.firebaseio.com"
+});
 
 const app = express()
 const main = express()
@@ -13,6 +19,7 @@ const pixelsRoute = require('./api/pixels')
 const snapshotsRoute = require('./api/snapshots')
 
 main.use('/api/v1', app)
+main.use(cors())
 main.use(bodyParser.json())
 main.use(bodyParser.urlencoded({ extended: false }))
 

@@ -6,6 +6,16 @@ const router = express.Router()
 const db = admin.firestore()
 const pixelsCollections = 'pixels'
 
+function getToday() {
+  let today = new Date()
+  let year = today.getFullYear().toString()
+  let rawMonth = (today.getMonth() + 1)
+  let month = (rawMonth > 10) ? rawMonth.toString() : ("0" + rawMonth.toString())  
+  let rawDate = today.getDate()
+  let date = (rawDate > 10) ? rawDate.toString() : ("0" + rawDate.toString())
+  return parseInt(year+month+date)
+}
+
 router.get('/', (req, res) => {
   res.status(200).send({
     message: 'Pixels routes'
@@ -18,12 +28,28 @@ router.get('/getAll', (req, res) => {
     .then(data => res.status(200).send(data))
     .catch((err) => {
       console.log(err)
-      res.error(404)
+      res.status(400)
     })
 })
 
-router.post('/newTodayPixel', (req, res) => {
-  let today = admin.firestore.Timestamp.now()
+// TODO : Query pixel in each month.
+
+// TODO : Get today pixel.
+router.get('/todayPixel/:date', (req, res) => {
+  let queryArray = [['date','==', parseInt(req.params.date)]]
+
+  firebaseHelper.firestore
+    .queryData(db, pixelsCollections, queryArray)
+    .then(data => res.status(200).send(data))
+    .catch(err => {
+      console.log(err)
+      res.status(400)
+    })
+})
+
+// TODO : Make date string for storing :: FORMAT "YYYYMMDDHHMM" get from Date()
+router.post('/todayPixel', (req, res) => {
+  let today = getToday()
   let todayPixel = {
     angry: req.body.angry,
     confuse: req.body.confuse,
@@ -46,5 +72,9 @@ router.post('/newTodayPixel', (req, res) => {
       })
     })
 })
+
+// TODO : Add new pixel at past date.
+
+// TODO : Update today pixel.
 
 module.exports = router
