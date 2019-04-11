@@ -74,7 +74,38 @@ router.post('/todayPixel', (req, res) => {
 })
 
 // TODO : Add new pixel at past date.
-
+router.post('/pastPixel', (req, res) => {
+  let today = getToday()
+  if (req.body.date > today) {
+    res.status(400).send({
+      message: 'Time requested in request is not in the past',
+      today: today,
+      requestedDate: req.body.date
+    })
+  } else {
+    let pixel = {
+      angry: req.body.angry,
+      confuse: req.body.confuse,
+      happy: req.body.happy,
+      passive: req.body.passive,
+      sad: req.body.sad,
+      finalEmotion: req.body.finalEmotion,
+      date: req.body.date
+    }
+    firebaseHelper.firestore
+    .createNewDocument(db, pixelsCollections, pixel)
+    .then(docRef => res.status(200).send({
+      message: 'Create pixel!',
+      pixel: pixel
+    }))
+    .catch((err) => {
+      console.log(err)
+      res.error(400).send({
+        error: err
+      })
+    })
+  }
+})
 // TODO : Update today pixel.
 
 module.exports = router
