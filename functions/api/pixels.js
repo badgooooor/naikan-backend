@@ -34,7 +34,21 @@ router.get('/getAll', (req, res) => {
 })
 
 // TODO : Query pixel in each month.
+router.get('/monthPixel/:year/:month', (req, res) => {
+  let month = (req.params.month > 10) ? (req.params.month.toString()) : ("0"+req.params.month.toString())
+  let start = parseInt(req.params.year+month+"01")
+  let end = parseInt(req.params.year+month+"31")
 
+  let queryArray = [['date', '>=', start], ['date', '<=', end]]
+
+  firebaseHelper.firestore
+    .queryData(db, pixelsCollections, queryArray)
+    .then(data => res.status(200).send(data))
+    .catch(err => {
+      console.log(err)
+      res.status(400)
+    })
+})
 // TODO : Query pixel in each year.
 router.get('/yearPixel/:year', (req, res) => {
   let start = parseInt(req.params.year+"0101")
