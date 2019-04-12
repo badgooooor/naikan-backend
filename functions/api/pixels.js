@@ -6,6 +6,7 @@ const router = express.Router()
 const db = admin.firestore()
 const pixelsCollections = 'pixels'
 
+// Date & Time functions.
 function getToday() {
   let today = new Date()
   let year = today.getFullYear().toString()
@@ -34,6 +35,22 @@ router.get('/getAll', (req, res) => {
 
 // TODO : Query pixel in each month.
 
+// TODO : Query pixel in each year.
+router.get('/yearPixel/:year', (req, res) => {
+  let start = parseInt(req.params.year+"0101")
+  let end = parseInt(req.params.year+"1231")
+
+  let queryArray = [['date', '>=', start], ['date', '<=', end]]
+
+  firebaseHelper.firestore
+    .queryData(db, pixelsCollections, queryArray)
+    .then(data => res.status(200).send(data))
+    .catch(err => {
+      console.log(err)
+      res.status(400)
+    })
+})
+
 // TODO : Get today pixel.
 router.get('/todayPixel/:date', (req, res) => {
   let queryArray = [['date','==', parseInt(req.params.date)]]
@@ -47,7 +64,6 @@ router.get('/todayPixel/:date', (req, res) => {
     })
 })
 
-// TODO : Make date string for storing :: FORMAT "YYYYMMDDHHMM" get from Date()
 router.post('/todayPixel', (req, res) => {
   let today = getToday()
   let todayPixel = {
@@ -73,7 +89,6 @@ router.post('/todayPixel', (req, res) => {
     })
 })
 
-// TODO : Add new pixel at past date.
 router.post('/pastPixel', (req, res) => {
   let today = getToday()
   if (req.body.date > today) {
@@ -106,6 +121,10 @@ router.post('/pastPixel', (req, res) => {
     })
   }
 })
+
 // TODO : Update today pixel.
+router.put('/todayPixel', (req, res) => {
+  
+})
 
 module.exports = router
