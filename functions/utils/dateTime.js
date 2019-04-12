@@ -16,7 +16,7 @@ const queryRangeYear = (year) => {
   return [['date', '>=', start], ['date', '<=', end]]
 }
 
-const queryRangeMonth = (month) => {
+const queryRangeMonth = (year, month) => {
   let ConvertedMonth = (month > 10) ? (month.toString()) : ("0"+req.params.month.toString())
   let start = parseInt(year+ConvertedMonth+"01")
   let end = parseInt(year+ConvertedMonth+"31")
