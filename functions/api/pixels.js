@@ -64,6 +64,7 @@ router.post('/todayPixel', (req, res) => {
     happy: req.body.happy,
     passive: req.body.passive,
     sad: req.body.sad,
+    love: req.body.love,
     finalEmotion: req.body.finalEmotion,
     date: today
   }
@@ -94,6 +95,7 @@ router.post('/pastPixel', (req, res) => {
       happy: req.body.happy,
       passive: req.body.passive,
       sad: req.body.sad,
+      love: req.body.love,
       finalEmotion: req.body.finalEmotion,
       date: req.body.date
     }
@@ -118,6 +120,7 @@ router.put('/todayPixel', (req, res) => {
     happy: req.body.happy,
     passive: req.body.passive,
     sad: req.body.sad,
+    love: req.body.love,
     finalEmotion: req.body.finalEmotion
   }
   firebaseHelper.firestore
