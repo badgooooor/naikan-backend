@@ -75,9 +75,9 @@ router.get('/yearSnapshot/:year', (req, res) => {
 
 //date in format yyyymmdd e.g. 20190425
 router.get('/Snapshot/:date', (req, res) => {
-  let snapShotRef = 'demo-'+req.params.date
+  let snapshotRef = 'demo-'+req.params.date
   firebaseHelper.firestore
-    .getDocument(db,snapshotsCollections,snapShotRef)
+    .getDocument(db,snapshotsCollections,snapshotRef)
     .then(data => res.status(200).send(data))
     .catch((err) => {
       console.log(err)
@@ -86,24 +86,24 @@ router.get('/Snapshot/:date', (req, res) => {
 })
 
 router.post('/addSnapshot', (req, res) => {
-  let today = dateTime.getToday()
-  let snapShot = {
+    let snapshot = {
     title: req.body.title,
     detail: req.body.detail,
     time: req.body.time,
     place: req.body.place,
-    date: today
-  }
-  firebaseHelper.firestore
-    .createDocumentWithID(db, snapshotsCollections, 'demo-'+today, snapShot)
+    date: req.body.date
+    }
+    firebaseHelper.firestore
+    .createDocumentWithID(db, snapshotsCollections, 'demo-'+req.body.date, snapshot)
     .then(docRef => res.status(200).send({
       message: 'Add snapshot!',
-      snapShot: snapShot
+      snapshot: snapshot
     }))
     .catch((err) => {
       console.log(err)
       res.status(400).send({ error: err })
     })
+  
 })
 /*
 router.get('/test', (req, res) => {
