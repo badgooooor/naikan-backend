@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "4869eb8c-0f5a-4bed-8863-fe720ce1e0a1",
+		"name": "naikan-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get today pixel",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://us-central1-naikan-87838.cloudfunctions.net/webApi/api/v1/pixels/todayPixel/",
+					"protocol": "https",
+					"host": [
+						"us-central1-naikan-87838",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"webApi",
+						"api",
+						"v1",
+						"pixels",
+						"todayPixel",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add today pixel",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"angry\": 1,\n\t\"confuse\": 3,\n\t\"happy\": 5,\n\t\"passive\": 2,\n\t\"sad\": 1,\n\t\"finalEmotion\": \"happy\"\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-naikan-87838.cloudfunctions.net/webApi/api/v1/pixels/todayPixel",
+					"protocol": "https",
+					"host": [
+						"us-central1-naikan-87838",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"webApi",
+						"api",
+						"v1",
+						"pixels",
+						"todayPixel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update today pixel",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"angry\": 1,\n\t\"confuse\": 3,\n\t\"happy\": 5,\n\t\"passive\": 8,\n\t\"sad\": 2,\n\t\"finalEmotion\": \"passive\"\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-naikan-87838.cloudfunctions.net/webApi/api/v1/pixels/todayPixel",
+					"protocol": "https",
+					"host": [
+						"us-central1-naikan-87838",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"webApi",
+						"api",
+						"v1",
+						"pixels",
+						"todayPixel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add pixel (at past)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"angry\": 1,\n\t\"confuse\": 6,\n\t\"happy\": 5,\n\t\"passive\": 2,\n\t\"sad\": 0,\n\t\"finalEmotion\": \"happy\",\n\t\"date\": 20180701\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-naikan-87838.cloudfunctions.net/webApi/api/v1/pixels/pastPixel",
+					"protocol": "https",
+					"host": [
+						"us-central1-naikan-87838",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"webApi",
+						"api",
+						"v1",
+						"pixels",
+						"pastPixel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all pixel (for debugging purpose)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://us-central1-naikan-87838.cloudfunctions.net/webApi/api/v1/pixels/getAll",
+					"protocol": "https",
+					"host": [
+						"us-central1-naikan-87838",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"webApi",
+						"api",
+						"v1",
+						"pixels",
+						"getAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get year pixel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://us-central1-naikan-87838.cloudfunctions.net/webApi/api/v1/pixels/yearPixel/2018/",
+					"protocol": "https",
+					"host": [
+						"us-central1-naikan-87838",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"webApi",
+						"api",
+						"v1",
+						"pixels",
+						"yearPixel",
+						"2018",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get month pixel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://us-central1-naikan-87838.cloudfunctions.net/webApi/api/v1/pixels/monthPixel/2019/4",
+					"protocol": "https",
+					"host": [
+						"us-central1-naikan-87838",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"webApi",
+						"api",
+						"v1",
+						"pixels",
+						"monthPixel",
+						"2019",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
