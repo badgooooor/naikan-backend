@@ -9,7 +9,8 @@ var serviceAccount = require('./config/serviceAccount.json')
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://naikan-87838.firebaseio.com"
+  databaseURL: "https://naikan-87838.firebaseio.com",
+  storageBucket: "naikan-87838.appspot.com"
 });
 
 const app = express()
